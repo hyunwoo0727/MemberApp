@@ -1,5 +1,7 @@
 package com.example.hyunwoo0727.memberapp;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,12 +15,18 @@ import java.util.Set;
 public class MemberServiceImpl implements MemberService {
 
     private Map<String,MemberBean> map;
-    private MemberDAO dao =  MemberDAO.getInstance();
+    private MemberDAO dao;
 
     private static MemberServiceImpl instance = new MemberServiceImpl();
 
     private MemberServiceImpl() {
     }
+
+    public MemberServiceImpl(Context context) {
+        System.out.println(context);
+        dao = new MemberDAO(context);
+    }
+
     public static MemberServiceImpl getInstance() {
         return instance;
     }
@@ -39,10 +47,10 @@ public class MemberServiceImpl implements MemberService {
     }
     @Override
     public int regist(MemberBean mBean) {
-        if(dao.findByPK(mBean.getId())==null){
+       // if(dao.findByPK(mBean.getId())==null){
             return dao.insert(mBean);
-        }
-        return 0;
+        //}
+       // return 0;
     }
     @Override
     public int update(MemberBean mBean) {
@@ -65,10 +73,14 @@ public class MemberServiceImpl implements MemberService {
     public int count() {
         return map.values().size();
     }
+
     @Override
     public MemberBean findById(String id) {
         return dao.findByPK(id);
     }
+
+
+
     @Override
     public List<MemberBean> findBy(String word) {
         List<MemberBean> findList = new ArrayList<MemberBean>();

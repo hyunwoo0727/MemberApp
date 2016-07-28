@@ -6,16 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 
 public class JoinActivity extends AppCompatActivity implements View.OnClickListener{
     EditText et_id,et_pw,et_name,et_ssn,et_email,et_phone;
     Button bt_join,bt_cancel;
+    MemberService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+        service = new MemberServiceImpl(this.getApplicationContext());
         et_id = (EditText) findViewById(R.id.et_id);
         et_pw = (EditText) findViewById(R.id.et_pw);
         et_name = (EditText) findViewById(R.id.et_name);
@@ -32,14 +34,11 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_join :
-                StringBuffer sb = new StringBuffer();
-                sb.append("ID : " + et_id.getText());
-                sb.append("\nPW : " + et_pw.getText());
-                sb.append("\nNAME : " + et_name.getText());
-                sb.append("\nSSN : " + et_ssn.getText());
-                sb.append("\nEMAIL : " + et_email.getText());
-                sb.append("\nPHONE : " + et_phone.getText());
-                Toast.makeText(JoinActivity.this,sb.toString(),Toast.LENGTH_LONG).show();
+                MemberBean mem = new MemberBean();
+                mem.setId(et_id.getText().toString());
+                mem.setPw(et_pw.getText().toString());
+                service.regist(mem);
+                startActivity(new Intent(this,MainActivity.class));
                 break;
             case R.id.bt_cancel :
                 startActivity(new Intent(this,MainActivity.class));
