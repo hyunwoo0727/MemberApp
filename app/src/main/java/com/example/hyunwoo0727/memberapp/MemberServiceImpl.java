@@ -31,13 +31,14 @@ public class MemberServiceImpl implements MemberService {
         return instance;
     }
     @Override
-    public MemberBean login(String id) {
-        MemberBean mBean = null;
+    public MemberBean login(MemberBean mBean) {
+        MemberBean temp = null;
         if(this.checkLogin(mBean)){
-            this.map();
-            MemberBean mb = map.get(mBean.getId());
+          //  this.map();
+            //temp = map.get(mBean.getId());
+            temp = dao.findByPK(mBean.getId());
         }
-        return mBean;
+        return temp;
     }
     @Override
     public Map<?, ?> map() {

@@ -8,5 +8,5 @@ public interface MemberService extends CommonService{
     public int update(MemberBean mBean);
     public int delete(MemberBean mBean);
     public MemberBean findById(String id);
-    public MemberBean login(String id);
+    public MemberBean login(MemberBean mBean);
 }

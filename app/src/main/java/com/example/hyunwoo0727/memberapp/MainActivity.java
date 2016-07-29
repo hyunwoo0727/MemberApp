@@ -29,9 +29,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_login:
-                MemberBean mem = service.findById(et_id.getText().toString());
-
-                if(mem!=null && mem.getPw().equals(et_pw.getText().toString())) {
+                MemberBean mem = new MemberBean();
+                mem.setId(et_id.getText().toString());
+                mem.setPw(et_pw.getText().toString());
+                mem = service.login(mem);
+                if(mem!=null) {
                     startActivity(new Intent(this,HomeActivity.class));
                 }
 
