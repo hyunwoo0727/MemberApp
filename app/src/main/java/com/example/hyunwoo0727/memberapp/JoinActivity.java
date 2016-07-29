@@ -37,6 +37,11 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                 MemberBean mem = new MemberBean();
                 mem.setId(et_id.getText().toString());
                 mem.setPw(et_pw.getText().toString());
+                mem.setName(et_name.getText().toString());
+                mem.setEmail(et_email.getText().toString());
+                mem.setSsn(et_ssn.getText().toString());
+                mem.setProfile("default1.png");
+                mem.setPhone(et_phone.getText().toString());
                 service.regist(mem);
                 startActivity(new Intent(this,MainActivity.class));
                 break;

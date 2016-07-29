@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Join Member"
+        android:text="MEMBER DETAIL"
         android:gravity="center_horizontal"
         android:textSize="30dp"/>
 
@@ -24,14 +24,13 @@
             android:text="I    D : "
             android:layout_weight="0.4"
             android:textAlignment="textEnd"/>
-        <EditText
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_id"
             android:textSize="20dp"
-            android:id="@+id/et_id"
-            android:hint="id"
-            android:inputType="text"/>
+            android:layout_weight="1.2"
+            android:textAlignment="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,14 +46,13 @@
             android:text="P   W : "
             android:layout_weight="0.4"
             android:textAlignment="textEnd"/>
-        <EditText
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
+            android:id="@+id/tv_pw"
             android:textSize="20dp"
-            android:id="@+id/et_pw"
-            android:hint="password"
-            android:inputType="textPassword"/>
+            android:layout_weight="1.2"
+            android:textAlignment="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,14 +68,13 @@
             android:text="NAME : "
             android:layout_weight="0.4"
             android:textAlignment="textEnd"/>
-        <EditText
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
+            android:id="@+id/tv_name"
             android:textSize="20dp"
-            android:id="@+id/et_name"
-            android:hint="name"
-            android:inputType="text"/>
+            android:layout_weight="1.2"
+            android:textAlignment="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,14 +90,13 @@
             android:text="S S N : "
             android:layout_weight="0.4"
             android:textAlignment="textEnd"/>
-        <EditText
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
+            android:id="@+id/tv_ssn"
             android:textSize="20dp"
-            android:id="@+id/et_ssn"
-            android:hint="SSN"
-            android:inputType="text"/>
+            android:layout_weight="1.2"
+            android:textAlignment="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -117,14 +113,13 @@
             android:layout_weight="0.4"
             android:textAlignment="textEnd"
             />
-        <EditText
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
+            android:id="@+id/tv_email"
             android:textSize="20dp"
-            android:id="@+id/et_email"
-            android:hint="email"
-            android:inputType="text"/>
+            android:layout_weight="1.2"
+            android:textAlignment="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -140,14 +135,13 @@
             android:text="PHONE : "
             android:layout_weight="0.4"
             android:textAlignment="textEnd"/>
-        <EditText
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
+            android:id="@+id/tv_phone"
             android:textSize="20dp"
-            android:id="@+id/et_phone"
-            android:hint="phone"
-            android:inputType="text"/>
+            android:layout_weight="1.2"
+            android:textAlignment="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -155,33 +149,93 @@
         android:orientation="horizontal"
         android:weightSum="2"
         android:gravity="center"
-        android:layout_marginTop="20dp">
-        <Button
-            android:id="@+id/bt_join"
+        android:layout_marginTop="10dp">
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:background="#52baff"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="Join"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:layout_marginRight="10dp"/>
-        <Button
-            android:id="@+id/bt_cancel"
+            android:textSize="19dp"
+            android:text="ADDR : "
+            android:layout_weight="0.4"
+            android:textAlignment="textEnd"/>
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:background="#52baff"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="Cancel"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="30dp"
-            android:textStyle="bold"/>
+            android:id="@+id/tv_addr"
+            android:textSize="20dp"
+            android:layout_weight="1.2"
+            android:textAlignment="center"/>
     </LinearLayout>
 
+        <Button
+            android:id="@+id/bt_list"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#52baff"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="return"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+    <Button
+        android:id="@+id/bt_modify"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#52baff"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="modify"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+    <Button
+        android:id="@+id/bt_map"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#52baff"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="show map"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+    <Button
+        android:id="@+id/bt_phone"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#52baff"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="call phone"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+    <Button
+        android:id="@+id/bt_c"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#52baff"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="c"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+    <Button
+        android:id="@+id/bt_d"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#52baff"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="d"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
 </LinearLayout>
-

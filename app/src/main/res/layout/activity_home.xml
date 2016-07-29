@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="3"
+        android:weightSum="2"
         android:layout_marginTop="100dp">
 
         <LinearLayout
@@ -55,28 +55,7 @@
                 android:textSize="30dp"
                 android:textStyle="bold"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="1"
-            android:layout_marginTop="20dp">
-            <Button
-                android:id="@+id/bt_create_db"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
-                android:background="#236bff"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="CREATE DATABASE"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
+
 
     </LinearLayout>
 

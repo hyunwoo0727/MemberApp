@@ -22,7 +22,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         service = new MemberServiceImpl(this.getApplicationContext());
         bt_login.setOnClickListener(this);
         bt_join.setOnClickListener(this);
-
     }
 
     @Override
@@ -32,11 +31,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 MemberBean mem = new MemberBean();
                 mem.setId(et_id.getText().toString());
                 mem.setPw(et_pw.getText().toString());
-                mem = service.login(mem);
-                if(mem!=null) {
+                if(service.login(mem)) {
                     startActivity(new Intent(this,HomeActivity.class));
                 }
-
                 break;
             case R.id.bt_join:
                 startActivity(new Intent(this,JoinActivity.class));

@@ -23,22 +23,22 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public MemberServiceImpl(Context context) {
-        System.out.println(context);
         dao = new MemberDAO(context);
     }
 
     public static MemberServiceImpl getInstance() {
         return instance;
     }
+
     @Override
-    public MemberBean login(MemberBean mBean) {
-        MemberBean temp = null;
-        if(this.checkLogin(mBean)){
-          //  this.map();
-            //temp = map.get(mBean.getId());
-            temp = dao.findByPK(mBean.getId());
+    public boolean login(MemberBean mBean) {
+        boolean loginOk = false;
+        MemberBean m = dao.findByPK(mBean.getId());
+        if(m!=null && m.getPw().equals(mBean.getPw())){
+            loginOk = true;
+            this.map();
         }
-        return temp;
+        return loginOk;
     }
     @Override
     public Map<?, ?> map() {
@@ -48,10 +48,10 @@ public class MemberServiceImpl implements MemberService {
     }
     @Override
     public int regist(MemberBean mBean) {
-       // if(dao.findByPK(mBean.getId())==null){
+        if(dao.findByPK(mBean.getId())==null){
             return dao.insert(mBean);
-        //}
-       // return 0;
+        }
+        return 0;
     }
     @Override
     public int update(MemberBean mBean) {
@@ -62,13 +62,13 @@ public class MemberServiceImpl implements MemberService {
         return result;
     }
     @Override
-    public int delete(MemberBean mBean) {
-        int result = 0;
+    public int delete(String id) {
+     /*   int result = 0;
         MemberBean temp = (MemberBean) map.get(mBean.getId());
-        if(temp.getPw().equals(mBean.getPw())){
-            result = dao.deleteMember(mBean.getId());
-        }
-        return result;
+        if(temp.getPw().equals(mBean.getPw())){*/
+           return dao.deleteMember(id);
+      /*  }*/
+     // return result;
     }
     @Override
     public int count() {
@@ -79,8 +79,6 @@ public class MemberServiceImpl implements MemberService {
     public MemberBean findById(String id) {
         return dao.findByPK(id);
     }
-
-
 
     @Override
     public List<MemberBean> findBy(String word) {
@@ -97,20 +95,14 @@ public class MemberServiceImpl implements MemberService {
     }
     @Override
     public ArrayList<MemberBean> list() {
+        this.map();
         ArrayList<MemberBean> allList = new ArrayList<MemberBean>();
         Set<?> keys = map.keySet();
         Iterator<?> it = keys.iterator();
         while(it.hasNext()){
-            allList.add((MemberBean) this.map.get(it.next()));
+            allList.add((this.map.get(it.next()))) ;
         }
         return allList;
     }
-    public boolean checkLogin(MemberBean mBean) {
-        boolean loginOk = false;
-        MemberBean m = dao.findByPK(mBean.getId());
-        if(m!=null && m.getPw().equals(mBean.getPw())){
-            loginOk = true;
-        }
-        return loginOk;
-    }
+
 }

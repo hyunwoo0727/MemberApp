@@ -14,10 +14,8 @@ public class HomeActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_home);
         bt_contacts = (Button) findViewById(R.id.bt_contacts);
         bt_img = (Button) findViewById(R.id.bt_img);
-        bt_create_db = (Button) findViewById(R.id.bt_create_db);
         bt_img.setOnClickListener(this);
         bt_contacts.setOnClickListener(this);
-        bt_create_db.setOnClickListener(this);
 
     }
 
@@ -30,9 +28,7 @@ public class HomeActivity extends Activity implements View.OnClickListener{
             case R.id.bt_img:
                 startActivity(new Intent(this,ImageActivity.class));
                 break;
-            case R.id.bt_create_db:
-                MemberDAO dao = new MemberDAO(this);
-                break;
+
         }
     }
 }

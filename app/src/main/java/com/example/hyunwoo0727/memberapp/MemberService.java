@@ -6,7 +6,7 @@ package com.example.hyunwoo0727.memberapp;
 public interface MemberService extends CommonService{
     public int regist(MemberBean mBean);
     public int update(MemberBean mBean);
-    public int delete(MemberBean mBean);
+    public int delete(String id);
     public MemberBean findById(String id);
-    public MemberBean login(MemberBean mBean);
+    public boolean login(MemberBean mBean);
 }

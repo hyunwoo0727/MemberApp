@@ -20,11 +20,12 @@ public class MemberDAO extends SQLiteOpenHelper {
     public static final String SSN = "ssn";
     public static final String EMAIL = "email";
     public static final String PHONE = "phone";
+    public static final String PROFILE = "profile";
     public static final String DB_NAME = "hanbitdb";
 
     public MemberDAO(Context context) {
         super(context, DB_NAME, null, 1); // contex = databases 까지
-        Log.d("생성자","????????????????????????????");
+        getWritableDatabase();
     }
 
     @Override
@@ -38,6 +39,7 @@ public class MemberDAO extends SQLiteOpenHelper {
                 +NAME+" text, "
                 +SSN+" text, "
                 +EMAIL+" text, "
+                +PROFILE+" text, "
                 +PHONE+" text);";
         db.execSQL(sql);
 
@@ -45,52 +47,68 @@ public class MemberDAO extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        this.onCreate(db);
     }
     public int insert(MemberBean mBean){
         int result = 0;
-        StringBuffer sb = new StringBuffer();
-    //    sb.append("INSERT INTO MEMBER(ID,PW,NAME,REGDATE,SSN,EMAIL,PROFILE_IMG,PHONE) ");
-      //  sb.append("VALUES(?,?,?,?,?,?,?,?)");
-        sb.append("INSERT INTO MEMBER(ID,PW) VALUES(");
-        sb.append("'"+mBean.getId()+"',");
-        sb.append("'"+mBean.getPw()+"'");
-        sb.append(");");
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(sb.toString());
-        return result;
-    }
-    public int updatePw(MemberBean mBean){
-        int result = 0;
-        String sql = "UPDATE MEMBER SET PW=?,EMAIL=? WHERE ID=?";
+        String sql = "INSERT INTO " + TABLE_NAME
+                + String.format("(%s,%s,%s,%s,%s,%s,%s) ", ID,PW,NAME,SSN,EMAIL,PROFILE,PHONE)
+                + String.format("values('%s','%s','%s','%s','%s','%s','%s');",
+                mBean.getId(),mBean.getPw(),mBean.getName(),mBean.getSsn(),mBean.getEmail(),mBean.getProfile(),mBean.getPhone());
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(sql);
         return result;
     }
+    public int updatePw(MemberBean mBean){
+        String sql = "UPDATE "+TABLE_NAME+" SET "+PW+"='"+mBean.getPw()+"',"+EMAIL+"='"+mBean.getEmail()+"' WHERE "+ID+"='"+mBean.getId()+"';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(sql);
+        return 1;
+    }
     public int deleteMember(String id){
-        int result = 0;
-        String sql = "DELETE FROM MEMBER WHERE ID=?";
+        int result = 1;
+        String sql = "DELETE FROM "+TABLE_NAME+" WHERE "+ID+"='"+id+"';";
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(sql);
         return result;
     }
     public MemberBean findByPK(String pk){
         MemberBean findBean = null;
-        String sql = "SELECT * FROM MEMBER WHERE ID='" +  pk +"'";
+        String sql = "SELECT "
+                + String.format("%s,%s,%s,%s,%s,%s,%s ", ID,PW,NAME,SSN,EMAIL,PROFILE,PHONE)
+                + String.format("FROM " + TABLE_NAME + " WHERE ID = '%s'",pk);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,null);
-        if(cursor.moveToNext()){
+        if(cursor.moveToFirst()){
             findBean = new MemberBean();
             findBean.setId(cursor.getString(cursor.getColumnIndex("id")));
             findBean.setPw(cursor.getString(cursor.getColumnIndex("pw")));
+            findBean.setName(cursor.getString(cursor.getColumnIndex("name")));
+            findBean.setSsn(cursor.getString(cursor.getColumnIndex("ssn")));
+            findBean.setEmail(cursor.getString(cursor.getColumnIndex("email")));
+            findBean.setProfile(cursor.getString(cursor.getColumnIndex("profile")));
+            findBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
         }
         return findBean;
     } // id
     public Map<String, MemberBean> selectMap() {
         Map<String, MemberBean> memberMap = new HashMap<String,MemberBean>();
-        String sql = "SELECT * FROM MEMBER";
+        String sql = "SELECT * FROM " + TABLE_NAME+";";
         SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL(sql);
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor!=null){
+            cursor.moveToFirst();
+        }do{
+            MemberBean findBean = new MemberBean();
+            findBean.setId(cursor.getString(cursor.getColumnIndex("id")));
+            findBean.setPw(cursor.getString(cursor.getColumnIndex("pw")));
+            findBean.setName(cursor.getString(cursor.getColumnIndex("name")));
+            findBean.setSsn(cursor.getString(cursor.getColumnIndex("ssn")));
+            findBean.setEmail(cursor.getString(cursor.getColumnIndex("email")));
+            findBean.setProfile(cursor.getString(cursor.getColumnIndex("profile")));
+            findBean.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+            memberMap.put(findBean.getId(),findBean);
+        }while(cursor.moveToNext());
+
         return memberMap;
     }
 }

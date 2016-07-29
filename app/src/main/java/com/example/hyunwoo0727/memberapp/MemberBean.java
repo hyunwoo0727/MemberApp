@@ -4,8 +4,9 @@ package com.example.hyunwoo0727.memberapp;
  * Created by hb2011 on 2016-07-27.
  */
 public class MemberBean {
-    private String id, pw, name, ssn, email, phone;
+    private String id, pw, name, ssn, email, phone, profile;
     private int photo;
+
 
     public String getId() {
         return id;
@@ -63,4 +64,11 @@ public class MemberBean {
         this.photo = photo;
     }
 
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
 }
